@@ -1,4 +1,5 @@
 import os
+import re
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -16,6 +17,11 @@ class DevConfig(Config):
 
 
 uri =  os.getenv('DATABASE_URI')
+
+
+if uri and uri.startswith('postgres://'):
+    uri = uri.replace("postgres://","postgresql://",1)
+
 print(uri)
 
 class ProdConfig(Config):
